@@ -1,0 +1,187 @@
+*{
+  margin: 0;
+  padding: 0;
+  font-family: 'poppins', sans-serif;
+}
+
+.body, html {
+  background: #efefef;
+}
+
+p {
+  line-height: 1.5;
+}
+
+ul {
+  list-style: none;
+}
+
+li {
+  line-height: 2.2;
+}
+
+.small {
+  line-height: 0;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #ff6347;
+  padding: 5px 5%;
+  border-bottom: 1px solid #e6e6e6;
+  margin-bottom: 60px;
+}
+
+nav ul {
+  text-align: right;
+  text-decoration: none;
+}
+
+nav li {
+  display: inline;
+  padding: 10px;
+}
+
+.logo {
+  width: 300px;
+  margin-left: 45px;
+}
+
+.container{
+  display: flex;
+  justify-content: space-between;
+  padding: 13px 5%;
+}
+
+.left-sidebar{
+  background: #cbdffa;
+  flex-basis: 20%;
+  position: sticky;
+  top: 70px;
+  align-self: flex-start;
+}
+
+.right-sidebar{
+  background: #cbdffa;
+  flex-basis: 20%;
+  position: sticky;
+  top: 70px;
+  align-self: flex-start;
+}
+
+.main-content{
+  flex-basis: 60%;
+}
+
+.heading {
+  color: #ff6347;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 50px;
+  padding: 0 20px;
+}
+
+.heading p {
+  color: #ff6347;
+}
+
+.form,
+.content {
+  width: 70%;
+  margin: 0 auto;
+}
+
+.form-group {
+  margin-bottom: 10px;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  width: 50%;
+  padding: 10px;
+  border: 1px solid #ff6347;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  font-family: inherit;
+}
+
+.form-group label {
+  text-align: left;
+  display: block;
+  margin: 0 0 5px 3px;
+}
+
+.btn {
+  padding: 10px 20px;
+  border: 1px solid #ff6347;
+  border-radius: 5px;
+  background: #ff6347;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  text-align: center;
+  appearance: button;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn:hover {
+  transform: scale(0.98);
+}
+
+.post-container {
+  flex-basis: 60%;
+  background: #fff;
+  border-radius: 6px;
+  padding: 25px;
+  color: #626262;
+  margin: 20px 0;
+  }
+
+.post-text {
+  color: #9a9a9a;
+  margin: 15px 0;
+  font-size: 15px;
+}
+
+.likebtn {
+  padding: 3px 6px;
+  border: 1px solid #ff6347;
+  border-radius: 5px;
+  background: #efefef;
+  color: #ff6347;
+  font-size: 12.5px;
+  font-weight: 500;
+  cursor: pointer;
+  text-align: center;
+  appearance: button;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.likebtn:hover {
+  transform: scale(0.95);
+}
+
+.user-profile span {
+  font-size: 10px;
+  color: #9a9a9a;
+}
+
+.comments {
+  font-size: 13px;
+  line-height: 150%;
+}
+
+.comments label {
+  font-weight: bold;
+  font-size: 13px;
+}
+
+
