@@ -13,6 +13,9 @@ app.use(express.urlencoded({extended: false}));
 
 app.use(cors({origin:"*"}));
 
+app.use('/api/messages', express.static('upload/images'));
+app.use('/api/users', express.static('upload/profilepictures')); 
+
 app.use('/api/messages', require('./routes/messageRoutes'));
 app.use('/api/users', require('./routes/userRoutes'));
 app.use(errorHandler);

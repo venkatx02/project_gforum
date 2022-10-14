@@ -8,20 +8,39 @@ const Register = () => {
         email:'',
         password:'',
         cpassword:'',
+        profilepicture:''
     });
 
     const changeHandler = (e) => {
         setData({...data, [e.target.name]:e.target.value});
     }
 
+    const uploadHandler = (event) => {
+        console.log(event.target.files[0])
+        setData({...data, profilepicture: event.target.files[0]})
+      }
+
     const submitHandler = (e) => {
         e.preventDefault();
         if(data.password==data.cpassword){
-            axios.post('http://localhost:5000/api/users/',{
-                username: data.username,
-                email: data.email,
-                password: data.password
-            }).then(res => alert(res.data));
+            let url = 'http://localhost:5000/api/users'
+            const formData = new FormData();
+            if(data.profilepicture){
+            formData.append('profilepicture', data.profilepicture, data.profilepicture.name)
+            formData.append('username', data.username)
+            formData.append('email', data.email)
+            formData.append('password', data.password)
+            }else{
+            formData.append('username', data.username)
+            formData.append('email', data.email)
+            formData.append('password', data.password)
+            }
+
+            try{
+            axios.post(url, formData).then(alert('Posted Successfully'))
+            }catch(error){
+            console.log(error)
+            }
         }else{
             alert("Passwords doesn't match");
         }
@@ -43,6 +62,7 @@ const Register = () => {
             <input type='email' name= 'email' placeholder='Email' onChange={changeHandler} /><br />
             <input type='password' name= 'password' placeholder='Password' onChange={changeHandler} /><br />
             <input type='password' name= 'cpassword' placeholder='Confirm Password' onChange={changeHandler} /><br />
+            <input type='file' name='profilepicture' onChange={uploadHandler} /><br />
             <input type='submit' value='Register' className='btn btn-block'/>
         </form>
         </div>

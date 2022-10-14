@@ -5,7 +5,7 @@ import Navbar from "./Navbar";
 import Register from "./Register";
 import Login from "./Login";
 import Dashboard from "./Dashboard";
-import Post from "./Post";
+import Myprofile from "./Myprofile";
 export const store = createContext();
 
 function App() {
@@ -19,7 +19,8 @@ function App() {
       <Route path='/register' element={< Register />}></Route>
       <Route path='/login' element={< Login />}></Route>
       <Route path='/dashboard' element={< Dashboard />}></Route>
-      <Route path='/post' element={< Post />}></Route>
+      <Route path='/myprofile' element={< Myprofile />}></Route>
+
       </Routes>
     </BrowserRouter>
     </store.Provider>

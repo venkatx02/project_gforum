@@ -2,6 +2,21 @@ const asyncHandler = require('express-async-handler');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const User = require('../models/userModel');
+const multer = require('multer');
+const path = require('path');
+
+const storage = multer.diskStorage({
+    destination: (req, file, callback) => {
+        callback(null, "./upload/profilepictures")
+    },
+    filename: (req, file, callback) => {
+        callback(null, file.originalname)
+    }
+})
+
+const uploadProfile = multer({
+    storage: storage
+});
 
 //Register - POST user to api "/api/users"
 const registerUser = asyncHandler(async (req, res) => {
@@ -23,7 +38,8 @@ const registerUser = asyncHandler(async (req, res) => {
     const user = await User.create({
         username,
         email,
-        password: hashedPassword
+        password: hashedPassword,
+        profilepicture: (req.file) ? req.file.originalname : null
     });
     if(user){
         res.status(201).json({
@@ -68,4 +84,4 @@ const generateToken = (id) => {
     });
 }
 
-module.exports = { registerUser, loginUser, getMe }
+module.exports = { registerUser, loginUser, getMe, uploadProfile }

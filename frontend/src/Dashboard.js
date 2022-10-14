@@ -3,12 +3,51 @@ import { useState, useContext, useEffect } from 'react';
 import { store } from './App';
 import { Navigate, Link } from 'react-router-dom';
 import axios from 'axios';
-import { FcLikePlaceholder, FcLike } from 'react-icons/fc'
+import { FcLikePlaceholder, FcLike } from 'react-icons/fc';
+import { AiOutlineDelete } from 'react-icons/ai';
+import {BsImage} from 'react-icons/bs';
 
 const Dashboard = () => {
     const [token, setToken] = useContext(store);
     const [userdata, setUserdata] = useState('');
     const [messages, setMessages] = useState([]);
+    const [data, setData] = useState({
+      text:'',
+      image: ''
+    })
+
+  const changeHandler = (e) => {
+      setData({...data, [e.target.name]:e.target.value})
+  }
+
+  const uploadHandler = (event) => {
+    console.log(event.target.files[0]);
+    setData({...data, image: event.target.files[0]})
+  }
+
+  const postHandler = (e) => {
+    e.preventDefault()
+
+
+    let url = 'http://localhost:5000/api/messages'
+    const formData = new FormData();
+    if(data.image){
+    formData.append('image', data.image, data.image.name)
+    formData.append('text', data.text)
+    }else{
+    formData.append('text', data.text)
+    }
+
+    const headers = {
+      Authorization: `Bearer ${token}`
+    }
+    try{
+     axios.post(url, formData, { headers: headers}).then(alert('Posted Successfully'))
+    }
+    catch(error){
+      console.log(error)
+    }
+  }
 
     useEffect(()=>{
       axios.get('http://localhost:5000/api/users/me', {headers: {Authorization: `Bearer ${token}`}}).then(res => {setUserdata(res.data)})
@@ -19,6 +58,21 @@ const Dashboard = () => {
         setMessages(res.data)
       }).catch(err => {console.log(err)})
     }, [])
+
+    const deletePost = (postID) => {
+      var con = window.confirm("Delete?")
+      if(con){
+      axios.delete(`http://localhost:5000/api/messages/${postID}`, {headers: {Authorization: `Bearer ${token}`}})
+      .then(res=>{
+        console.log(res)
+        const newData = messages.filter(message=>{
+          return message._id !== res._id
+        })
+        setData(newData)
+        alert("Deleted Successfully");
+      });
+    }
+    }
 
     const likePost = (id) => {
       axios.put(`http://localhost:5000/api/messages/like/${id}`, id, {headers: {Authorization: `Bearer ${token}`}}).then(res=>{
@@ -66,21 +120,55 @@ const Dashboard = () => {
 
   return (
     <div className='container'>
-      <div className='left-sidebar'></div>
+      <div className='left-sidebar'>
+        <ul>
+          <li><button className='options-button' onClick={() => {window.scrollTo({top: 0, left: 0, behavior: 'smooth'})}}>Make a new post</button></li>
+          <li><button className='options-button'onClick={() =>{window.scrollTo({top: 0, left: 0, behavior: 'smooth'})}}>Latest Posts</button></li>
+          <li><Link to='/myposts'><button className='options-button'>My Posts</button></Link></li>
+        </ul>
+      </div>
       <div className='main-content'>
+        <div className='post-input-container'>
+          <div className='post-input-profile'>
+          <img src={`http://localhost:5000/api/users/${userdata.profilepicture}`} />
+            <div>
+            <p>{userdata.username}</p>
+            <small>Public</small>
+            </div>
+          </div>
+        <form onSubmit={postHandler}>
+        <textarea name= 'text' rows='3' placeholder='Whats up?' onChange={changeHandler} /><br />
+        <button type='button'><BsImage/><input type='file' name='image' onChange={uploadHandler} /></button>
+        <input type='submit' value='Post'/>
+        {
+          data.image &&
+          <p style={{fontSize: "10px"}}>Uploaded {data.image.name}</p>
+        }
+        </form>
+        </div>
       <ul>
         {
-        messages.reverse().map(message => (
+        messages.map(message => (
           <section>
           <li key={message._id}>
           <div className='post-container'>
             <div className='user-profile'>
-              <div>
-                <p className='small'>{message.user.username}</p>
-                <span>posted/modified at: {message.createdAt}</span>
+              <div className='post-profile'>
+                <img src={`http://localhost:5000/api/users/${message.user.profilepicture}`} />
+                <div>
+                <p>{message.user.username}</p>
+                <small>posted/modified at: {message.createdAt}</small>
+                </div>
+                {message.user._id == userdata._id &&
+                <button className='delete-post' onClick={()=>{deletePost(message._id)}}><AiOutlineDelete /></button>
+                }
               </div>
             </div>
             <p className='post-text'>{message.text}</p><br />
+            {
+            message.image!=null &&
+            <img className='post-image' src={`http://localhost:5000/api/messages/${message.image}`} />
+            }
             <div>
             <div>
             <h5>{message.likes.length} Likes </h5>
@@ -103,7 +191,7 @@ const Dashboard = () => {
               e.preventDefault()
               makeComment(e.target[0].value, message._id)
             }}>
-              <input type='text' placeholder='Add a comment...'></input>
+              <input type='text' className='comment-input' placeholder='Add a comment...'></input>
             </form>
             </div>
           </div>
