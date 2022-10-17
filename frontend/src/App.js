@@ -7,6 +7,8 @@ import Login from "./Login";
 import Dashboard from "./Dashboard";
 import Myprofile from "./Myprofile";
 import Myposts from "./Myposts";
+import Start from "./Start";
+
 export const store = createContext();
 
 function App() {
@@ -17,6 +19,7 @@ function App() {
     <BrowserRouter>
       <Navbar />
       <Routes>
+      <Route path='/' element={< Start />}></Route>
       <Route path='/register' element={< Register />}></Route>
       <Route path='/login' element={< Login />}></Route>
       <Route path='/dashboard' element={< Dashboard />}></Route>

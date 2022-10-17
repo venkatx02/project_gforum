@@ -6,6 +6,7 @@ import { FaSignInAlt, FaSignOutAlt, FaUser } from 'react-icons/fa';
 import { VscFeedback } from 'react-icons/vsc';
 import { CgProfile } from 'react-icons/cg';
 import axios from 'axios';
+import logo from './logo.png';
 
 const Navbar = () => {
   const token = localStorage.getItem("jwt");
@@ -17,7 +18,7 @@ const Navbar = () => {
 
   return (
     <nav>
-      <h1 style={{color: "white", fontSize: "50px", fontWeight: "bolder"}}>G-Forum</h1>
+      <h1 style={{color: "white", fontSize: "50px", fontWeight: "bolder"}}><Link to='/'><img className='logo' src={logo} /></Link></h1>
       {!token &&
         <ul>
             <li><Link to='/register'><button className='nav-button'><FaUser />Register</button></Link></li>
