@@ -62,8 +62,8 @@ nav li {
   top: 70px;
   align-self: flex-start;
   border-radius: 5px;
-  height: 250px;
-  padding: 25px;
+  height: 200px;
+  padding: 20px;
 }
 
 .right-sidebar{
@@ -257,8 +257,9 @@ nav li {
 
 .post-text {
   color: #9a9a9a;
-  margin: 15px 0;
+  margin: 5px 0;
   font-size: 15px;
+  margin-bottom: 0px;
 }
 
 .post-image {
@@ -363,5 +364,6 @@ nav li {
   border: 1px solid #626262;
   border-radius: 17px;
   font-family: inherit;
+  margin-top: 10px;
  }
 

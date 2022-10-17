@@ -25,7 +25,7 @@ const getMessages = asyncHandler(async (req, res) => {
 })
 
 const userMessages = asyncHandler(async (req, res) => {
-    const messages = await Message.find({user: req.params.id}).populate("user", "_id username");
+    const messages = await Message.find({user: req.user._id}).populate("user", "_id username profilepicture").populate("comments.postedBy", "_id username profilepicture").sort('-createdAt');
     res.status(200).json(messages);
 })
 

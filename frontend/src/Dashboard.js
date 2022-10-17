@@ -6,9 +6,10 @@ import axios from 'axios';
 import { FcLikePlaceholder, FcLike } from 'react-icons/fc';
 import { AiOutlineDelete } from 'react-icons/ai';
 import {BsImage} from 'react-icons/bs';
+import Leftbar from './Leftbar';
 
 const Dashboard = () => {
-    const [token, setToken] = useContext(store);
+    const token = localStorage.getItem("jwt");
     const [userdata, setUserdata] = useState('');
     const [messages, setMessages] = useState([]);
     const [data, setData] = useState({
@@ -120,13 +121,7 @@ const Dashboard = () => {
 
   return (
     <div className='container'>
-      <div className='left-sidebar'>
-        <ul>
-          <li><button className='options-button' onClick={() => {window.scrollTo({top: 0, left: 0, behavior: 'smooth'})}}>Make a new post</button></li>
-          <li><button className='options-button'onClick={() =>{window.scrollTo({top: 0, left: 0, behavior: 'smooth'})}}>Latest Posts</button></li>
-          <li><Link to='/myposts'><button className='options-button'>My Posts</button></Link></li>
-        </ul>
-      </div>
+      <Leftbar />
       <div className='main-content'>
         <div className='post-input-container'>
           <div className='post-input-profile'>

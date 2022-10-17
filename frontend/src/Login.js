@@ -20,7 +20,10 @@ const Login = () => {
         axios.post('http://localhost:5000/api/users/login',{
             email: data.email,
             password: data.password
-        }).then(res => setToken(res.data.token));
+        }).then(res => {
+            setToken(res.data.token);
+            localStorage.setItem("jwt", res.data.token);
+        })
     }
 
     if(token){

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import { store } from './App';
 import { useState, useContext, useEffect } from 'react';
 import { FaSignInAlt, FaSignOutAlt, FaUser } from 'react-icons/fa';
@@ -8,10 +8,11 @@ import { CgProfile } from 'react-icons/cg';
 import axios from 'axios';
 
 const Navbar = () => {
-  const [token, setToken] = useContext(store);
+  const token = localStorage.getItem("jwt");
 
   const logoutHandler = () => {
-    setToken(null)
+    localStorage.clear();
+    window.location.replace("http://localhost:3000/login");
   }
 
   return (

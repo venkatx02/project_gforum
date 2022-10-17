@@ -9,6 +9,6 @@ router.route('/:id').put(protect, updateMessage).delete(protect, deleteMessage);
 router.route('/like/:id').put(protect, like)
 router.route('/unlike/:id').put(protect, unlike)
 router.route('/comment/:id').put(protect, comment)
-router.route('/myposts/:id').get(protect, userMessages)
+router.route('/myposts').get(protect, userMessages)
 
 module.exports = router;

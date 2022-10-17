@@ -2,16 +2,24 @@ import React from 'react';
 import { useState, useContext, useEffect } from 'react';
 import { store } from './App';
 import axios from 'axios';
+import Leftbar from './Leftbar';
+import { Navigate, Link } from 'react-router-dom';
 
 const Myprofile = () => {
-    const [token, setToken] = useContext(store);
+    const token = localStorage.getItem("jwt");
     const [userdata, setUserdata] = useState('');
 
     useEffect(()=>{
     axios.get('http://localhost:5000/api/users/me', {headers: {Authorization: `Bearer ${token}`}}).then(res => {setUserdata(res.data)})
-  }, [])
+    }, [])
+
+    if(!token){
+    return <Navigate to="/login" />
+    }
 
   return (
+    <div className='container'>
+    <Leftbar />
     <div className='your-profile'>
     <center>
     <h1>Your Profile</h1>
@@ -20,6 +28,7 @@ const Myprofile = () => {
     <label>Email: </label>{userdata.email}<br/>
     <label>Password: </label>**********<br/>
     </center>
+    </div>
     </div>
   )
 }
