@@ -53,6 +53,7 @@ const Myposts = () => {
 
   return (
     <div className='container'>
+    <div className='left-sidebar'></div>
     <Leftbar />
     <div className='main-content'>
     <div>

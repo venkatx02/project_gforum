@@ -5,7 +5,7 @@
 }
 
 .body, html {
-  background: #efefef;
+  background-image: url('./bgimage.png');
 }
 
 p {
@@ -55,12 +55,25 @@ nav li {
   padding: 13px 5%;
 }
 
-.left-sidebar{
+.left-bar{
+  position: fixed;
   height: 200px;
   background: #fff;
   border-radius: 5px;
   padding: 20px;
   margin-left: -30px;
+}
+
+.left-bar li {
+  line-height: 3;
+}
+
+.left-sidebar{
+  background: #cbdffa;
+  flex-basis: 20%;
+  position: sticky;
+  top: 70px;
+  align-self: flex-start;
 }
 
 .right-sidebar{
@@ -205,8 +218,10 @@ nav li {
 
 .post-input-profile img{
   border-radius: 50%;
-  width: 45px;
   margin-right: 15px;
+  object-fit: cover;
+  width: 45px;
+  height: 45px;
 }
 
 .post-input-profile p{
@@ -223,8 +238,10 @@ nav li {
 
 .post-profile img{
   border-radius: 50%;
-  width: 45px;
   margin-right: 15px;
+  object-fit: cover;
+  width: 45px;
+  height: 45px;
 }
 
 .post-profile p{
@@ -260,8 +277,9 @@ nav li {
 }
 
 .post-image {
-  height: 500px;
+  object-fit: cover;
   width: 500px;
+  height: 500px;
 }
 
 .likebtn {
@@ -318,8 +336,10 @@ nav li {
 
 .your-profile img{
   border-radius: 50%;
-  width: 150px;
   margin-right: 15px;
+  object-fit: cover;
+  width: 150px;
+  height: 150px;
 }
 
 .left-sidebar ul li{
@@ -421,4 +441,3 @@ nav li {
   margin-top: 2px;
   margin-bottom: -15px;
  }
-

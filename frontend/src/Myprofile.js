@@ -19,6 +19,7 @@ const Myprofile = () => {
 
   return (
     <div className='container'>
+    <div className='left-sidebar'></div>
     <Leftbar />
     <div className='your-profile'>
     <center>

@@ -121,6 +121,7 @@ const Dashboard = () => {
 
   return (
     <div className='container'>
+      <div className='left-sidebar'></div>
       <Leftbar />
       <div className='main-content'>
         <div className='post-input-container'>
